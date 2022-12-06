@@ -23,6 +23,9 @@ namespace csharp_oop_shop_3
         /// <param name="IVA">l'IVA non ha bisogno di essere presentata in percentuale, ma semplicemente in numero</param>
         public Prodotto(string name, double prezzo, double IVA)
         {
+            this.SetName(name);
+            this.SetPrezzo(prezzo);
+            this.SetIVA(IVA);
             this.codice = CalcoloCodice();
             this.name = name;
             this.prezzo = Math.Round(prezzo, 2); //In questo passaggio arrotondo il prezzo a due cifre decimali
@@ -38,6 +41,10 @@ namespace csharp_oop_shop_3
         /// <param name="IVA">l'IVA non ha bisogno di essere presentata in percentuale, ma semplicemente in numero</param>
         public Prodotto(string name, string description, double prezzo, double IVA)
         {
+            this.SetName(name);
+            this.SetDescription(description);
+            this.SetPrezzo(prezzo);
+            this.SetIVA(IVA);
             this.codice = CalcoloCodice();
             this.name = name;
             this.description = description;
@@ -59,9 +66,13 @@ namespace csharp_oop_shop_3
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new noName("I  prodotti hanno perforza un nome");
+                throw new noName("I prodotti hanno perforza un nome");
             }
-            this.name = name;
+            else
+            {
+                this.name = name;
+            }
+            
         }
 
         public string GetDescription()
@@ -95,7 +106,7 @@ namespace csharp_oop_shop_3
             }
             else
             {
-                Console.WriteLine("Il prezzo non può avere un valore negativo!");
+                throw new excPrezzo("Il prezzo non può avere un valore negativo!");
             }
         }
 
@@ -106,7 +117,15 @@ namespace csharp_oop_shop_3
 
         public void SetIVA(double IVA)
         {
-            this.IVA = IVA;
+            if (IVA < 0)
+            {
+                throw new evasioneFiscale("NON SI EVADE IL FISCO! ORA TI ARRIVA LA GUARDIA DI FINANZA!");
+            }
+            else
+            {
+                this.IVA = IVA;
+            }
+            
         }
 
         /// <summary>

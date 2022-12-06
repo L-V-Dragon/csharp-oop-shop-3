@@ -15,11 +15,16 @@ namespace csharp_oop_shop_3
         private double pH;
         private string sorgente;
         private double maxCapienza;
+        
 
         // COSTRUTTORE
 
         public Acqua(string nome, string descrizione, float prezzo, int iva, double litri, double pH, string sorgente) : base(nome, descrizione, prezzo, iva)
         {
+
+            this.SetPH(pH);
+            this.SetSorgente(sorgente);
+            this.SetLitri(litri);
             this.litri = litri;
             this.pH = Math.Round(pH, 2);
             this.sorgente = sorgente;
@@ -46,6 +51,7 @@ namespace csharp_oop_shop_3
         {
             this.litri = litri;
         }
+
         public void SetPH(double pH)
         {
             if (pH < 0 || pH > 14)
@@ -113,6 +119,13 @@ namespace csharp_oop_shop_3
         public void SvuotaBottiglia()
         {
             this.litri = 0;
+        }
+
+        public static double convertiInGalloni(double litri)
+        {
+            const double litriInGalloni = 3.785;
+            double galloni = litri * litriInGalloni;
+            return galloni;
         }
 
         public override void StampaProdotto()
